@@ -16,7 +16,8 @@ def init_data(filename):
     res = pd.read_csv(filename, index_col=0).drop(columns=['First Name', 'Last Name', 'Birthday']).drop_duplicates().dropna()
     res = change_cat_to_int(res, "Best Hand")
     visu = KP(res)
-    visu.compare_histograms("Hogwarts House", res.drop(columns = ['Hogwarts House']).columns[3:5])
+    # visu.compare_histograms("Hogwarts House", res.drop(columns = ['Hogwarts House']).columns)
+    visu.pairplot_("Hogwarts House", res.drop(columns = ['Hogwarts House']).columns)
     
     # y_train = res['Hogwarts House']
     # x_train = res.drop(columns = ['Hogwarts House'])
@@ -35,4 +36,4 @@ if __name__ == "__main__":
         # try:
         init_data(sys.argv[1])
         # except:
-        print("That filename doesn't exist")
+        # print("That filename doesn't exist")

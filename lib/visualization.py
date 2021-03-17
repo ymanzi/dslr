@@ -26,18 +26,30 @@ class Komparator:
 		plt.legend(prop={'size': 16}, title=categorical_var)
 		plt.show()
 
+	def pairplot_(self, categorical_var, numerical_var):
+		lst_categorical = self.data[categorical_var].unique()
+		my = []
+		for elem in lst_categorical:
+			data = self.data[numerical_var[0:3]]
+			sns.pairplot(data, hue=categorical_var) # HHHHHHHHHEEEEEERRRRRREEEEE
+			plt.legend(prop={'size': 16}, title=elem)
+			plt.show()
+			return
+
 	def compare_histograms(self, categorical_var, numerical_var):
 		lst_categorical = self.data[categorical_var].unique()
-		my_list = []
-		colors = ['#E69F00', '#56B4E9', '#F0E442', '#009E73', '#D55E00']
-		for elem in lst_categorical:
-			my_list.append (list(self.data[(self.data[categorical_var] == elem)][numerical_var].dropna()))
-		plt.hist(my_list, stacked=False, label=lst_categorical, density=True, bins = int(180/15))
-		plt.legend()
-		# plt.xlabel(numerical_var)
+		row = int(len(numerical_var))
+		fig, axis = plt.subplots(nrows= 2, ncols=  row // 2)
+		for i in range(0, len(numerical_var)):
+			my_list = []
+			for j, elem in enumerate(lst_categorical):
+				my_list.append (list(self.data[(self.data[categorical_var] == elem)][numerical_var[i]].dropna().values.transpose()))
+			axis[i % 2, i // 2].hist(my_list, stacked=False, label=lst_categorical)#, density=True, bins = int(185/15))
+			axis[i % 2, i // 2].set_xlabel(numerical_var[i])
+			if not(i):
+				axis[i % 3, i // 3].legend()
+		fig.suptitle("Histograms")
 		plt.show()
-
-
 
 # from FileLoader import FileLoader
 # loader = FileLoader()
