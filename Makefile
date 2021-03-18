@@ -23,14 +23,19 @@ env:
 	pip install matplotlib
 
 clean:
-	rm -f __pycache__
+	rm -f __pycache__ houses.csv theta.csv
+	rm -f resources/x_test.csv
+	rm -f resources/y_test.csv
+	rm -f resources/x_train.csv
+	rm -f resources/y_train.csv
 
 predict:
-	python3.8 logreg_predict.py resources/x_test.csv theta.csv
-	# python3.8 logreg_predict.py resources/dataset_test.csv theta.csv
+	# python3.8 logreg_predict.py resources/y_test.csv theta.csv
+	python3.8 logreg_predict.py resources/dataset_test.csv theta.csv
 
 train:
 	python3.8 logreg_train.py resources/dataset_train.csv
+	# python3.8 logreg_train.py resources/x_train.csv
 
 histo:
 	python3.8 histogram.py resources/dataset_train.csv

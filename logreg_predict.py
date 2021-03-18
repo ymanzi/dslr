@@ -35,8 +35,8 @@ def one_versus_all_test(x_test, theta_list):
     return y_predict
 
 def prediction_function(data_file, theta_file):
-    x_test = pd.read_csv(data_file, index_col=0).values
-    # x_test = change_cat_to_int(x_test, "Best Hand") #.drop(columns = 'Hogwarts House')
+    x_test = pd.read_csv(data_file, index_col=0).drop(columns=['Hogwarts House','First Name','Last Name','Birthday', 'Defense Against the Dark Arts'])
+    x_test = change_cat_to_int(x_test, "Best Hand").values #.drop(columns = 'Hogwarts House')
     for i in range(1, x_test.shape[1]):
         x_test[:,i] = minmax_normalization(x_test[:,i])
     # y_test = pd.read_csv("resources/y_test.csv" , index_col=0).values
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     elif sys.argv[1][-3:] != "csv" or sys.argv[2][-3:] != "csv":
         print("wrong data file extension")
     else:
-        # try:
-        prediction_function(sys.argv[1], sys.argv[2])
-        # except:
-            # print("That filename doesn't exist")
+        try:
+            prediction_function(sys.argv[1], sys.argv[2])
+        except:
+            print("That filename doesn't exist")
