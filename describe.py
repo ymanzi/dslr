@@ -14,15 +14,17 @@ def change_cat_to_int(df, cat):
 
 def get_stat(df):
     list_columns = df.columns
-    list_rows = ['Count', 'Mean','Std','Min','25%','50%','75%','Max']
+    list_rows = ['Count', 'Mean','Var', 'Std','Min','25%', 'Median' ,'50%','75%','Max']
     list_data = []
     for col in list_columns:
         data = df[col].values
         list_data.append(np.array([df[col].size \
             ,  mean_(data)\
+            , var_(data)\
             , std_(data)\
             , min(data.tolist())\
             , quartiles_(data, 25)\
+            , median_(data)\
             , quartiles_(data, 50)\
             , quartiles_(data, 75)\
             , max(data)]))

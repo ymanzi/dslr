@@ -36,14 +36,12 @@ def one_versus_all_test(x_test, theta_list):
 
 def prediction_function(data_file, theta_file):
     x_test = pd.read_csv(data_file, index_col=0).drop(columns=['Hogwarts House','First Name','Last Name','Birthday', 'Defense Against the Dark Arts'])
-    x_test = change_cat_to_int(x_test, "Best Hand").values #.drop(columns = 'Hogwarts House')
+    x_test = change_cat_to_int(x_test, "Best Hand").values
     for i in range(1, x_test.shape[1]):
         x_test[:,i] = minmax_normalization(x_test[:,i])
-    # y_test = pd.read_csv("resources/y_test.csv" , index_col=0).values
     theta = pd.read_csv(theta_file , index_col=0).values
     y_predict = one_versus_all_test(x_test, theta)
     export_predict_to_file(y_predict.tolist())
-    # print("Accuracy Score: ", accuracy_score_(y_test, y_predict))
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

@@ -19,7 +19,7 @@ def change_cat_to_int(df, cat):
         df.loc[df[cat] == elem, cat] = i
     return df
 
-def one_versus_all_train(x_train, y_train):
+def one_versus_all_train(x_train, y_train, gradient_type):
     """
         for each school, it will calculate the probability of the student to go to that
         school instead of any other.
@@ -32,7 +32,7 @@ def one_versus_all_train(x_train, y_train):
     for school in cat_unique:
         verif = y_train == school
         y_zero_train = verif.astype(float)
-        mlr = MLR(np.ones(x_train.shape[1] + 1), alpha= 1e-3, n_cycle=100000) #100000
+        mlr = MLR(np.ones(x_train.shape[1] + 1), alpha= 1e-3, n_cycle=100000, grandient_type= gradient_type) #100000
         mlr.fit_(x_train, y_zero_train)
         y_hat = mlr.predict_(x_train)
         for i, school_prob in enumerate(y_hat.tolist()):
@@ -61,26 +61,31 @@ def init_exo(filename):
     x_train = res.drop(columns = ['Hogwarts House']).values
     return list([x_train, y_train])
 
-def logreg_train(data):
+def logreg_train(data, gradient_type='batch'):
     x_train = data[0].astype(float)
     for i in range(1, x_train.shape[1]):
         x_train[:,i] = minmax_normalization(x_train[:,i])
     y_train = data[1]
-    ret = one_versus_all_train(x_train, y_train)
+    ret = one_versus_all_train(x_train, y_train, gradient_type)
     pd.DataFrame(ret[1]).to_csv("theta.csv")
     y_predict = ret[0].reshape(-1, 1)
     print("F1 Score: ", f1_score_(y_train, y_predict, 1.0))
     print("Accuracy Score: ", accuracy_score_(y_train, y_predict))
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 and len(sys.argv) != 3:
         print("incorrect number of arguments")
     elif sys.argv[1][-3:] != "csv":
         print("wrong data file extension")
+    elif len(sys.argv) == 3 and sys.argv[2] not in ['stochastic', 'batch', 'mini_batch']:
+        print("wrong argument for gradient-type")
     else:
         try:
-            # split_data(sys.argv[1])
+            split_data(sys.argv[1])
             data = init_exo(sys.argv[1])  # data = [x_train, y_train]
-            logreg_train(data)
+            if len(sys.argv) == 2:
+                logreg_train(data)
+            else:
+                logreg_train(data, sys.argv[2])# The second parameter is the gradient type
         except:
             print("That filename doesn't exist")

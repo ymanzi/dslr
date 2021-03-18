@@ -33,7 +33,7 @@ def var_(x):
 	if length == 0:
 		return None
 	mean = float(np.sum(x) / length)
-	return np.sum(np.power(np.substract(x, mean), 2)) / length
+	return np.sum(np.power(np.subtract(x, mean), 2)) / length
 
 def std_(x):
 	length = x.size

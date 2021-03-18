@@ -76,4 +76,3 @@ def f1_score_(y, y_hat, pos_label=1):
     dic_pos_neg = check_positive_negative(y, y_hat, pos_label)
     return (2 * precision_score_(y, y_hat, pos_label) * recall_score_(y, y_hat, pos_label)) /\
          (precision_score_(y, y_hat, pos_label) + recall_score_(y, y_hat, pos_label))
-
