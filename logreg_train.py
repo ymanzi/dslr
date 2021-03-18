@@ -68,7 +68,7 @@ if __name__ == "__main__":
         print("wrong data file extension")
     else:
         try:
-            init_exo(sys.argv[1])
+            # init_exo(sys.argv[1])
             logreg_train()
         except:
             print("That filename doesn't exist")

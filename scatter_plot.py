@@ -6,7 +6,7 @@ from lib.visualization import Komparator as KP
 def init_data(filename):
     res = pd.read_csv(filename, index_col=0).drop(columns=['First Name', 'Last Name', 'Birthday', 'Best Hand']).drop_duplicates().dropna()
     visu = KP(res)
-    visu.compare_histograms("Hogwarts House", res.drop(columns = ['Hogwarts House']).columns)
+    visu.scatterplot_("Hogwarts House", res.drop(columns = ['Hogwarts House']).columns)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

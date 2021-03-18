@@ -26,20 +26,45 @@ class Komparator:
 		plt.legend(prop={'size': 16}, title=categorical_var)
 		plt.show()
 
+	# def pairplot_(self, categorical_var, numerical_var):
+	# 	lst_categorical = self.data[categorical_var].unique()
+	# 	size_n_var = len(numerical_var) // 2
+	# 	for var1 in numerical_var[:size_n_var]:
+	# 		for var2 in numerical_var[size_n_var:]:
+	# 			# if var1 != var2:
+	# 			sns.pairplot(self.data, hue = categorical_var, vars=[var1, var2])
+	# 			plt.show()
+	# 	return
+
 	def pairplot_(self, categorical_var, numerical_var):
-		lst_categorical = self.data[categorical_var].unique()
-		my = []
-		for elem in lst_categorical:
-			data = self.data[numerical_var[0:3]]
-			sns.pairplot(data, hue=categorical_var) # HHHHHHHHHEEEEEERRRRRREEEEE
-			plt.legend(prop={'size': 16}, title=elem)
+		sns.pairplot(self.data, hue = categorical_var, vars=numerical_var, height=1)
+		plt.show()
+		return
+
+	def scatterplot_(self, categorical_var, numerical_var):
+		size_n_var = len(numerical_var) // 2
+		for j, var1 in enumerate(numerical_var):
+			tmp_cat = list(numerical_var[j:])
+			tmp_cat.remove(var1)
+			if len(tmp_cat) > 1:
+				if len(tmp_cat) % 2:
+					fig, axes = plt.subplots(nrows = 2, ncols = (len(tmp_cat) // 2) + 1, figsize=(15,10))
+				else:
+					fig, axes = plt.subplots(nrows = 2, ncols = (len(tmp_cat) // 2), figsize=(15,10))
+			for i, var2 in enumerate(tmp_cat):
+				if len(tmp_cat) == 1:
+					sns.scatterplot(data=self.data, y=var1, x=var2,hue = categorical_var)
+				elif len(tmp_cat) == 2:
+					sns.scatterplot(data=self.data, y=var1, x=var2,hue = categorical_var, ax = axes[i])
+				else:
+					sns.scatterplot(data=self.data, y=var1, x=var2,hue = categorical_var, ax = axes[i % 2][i // 2])
 			plt.show()
-			return
+		return
 
 	def compare_histograms(self, categorical_var, numerical_var):
 		lst_categorical = self.data[categorical_var].unique()
 		row = int(len(numerical_var))
-		fig, axis = plt.subplots(nrows= 2, ncols=  row // 2)
+		fig, axis = plt.subplots(nrows= 2, ncols=  row // 2 + 1)
 		for i in range(0, len(numerical_var)):
 			my_list = []
 			for j, elem in enumerate(lst_categorical):
@@ -51,10 +76,3 @@ class Komparator:
 		fig.suptitle("Histograms")
 		plt.show()
 
-# from FileLoader import FileLoader
-# loader = FileLoader()
-# data = loader.load("../resources/athlete_events.csv")
-# tmp = Komparator(data)
-# tmp.compare_histograms("Sex", "Height")
-# tmp.compare_box_plots("Sex", "Height")
-# tmp.density("Sex", "Height")

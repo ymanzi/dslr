@@ -25,7 +25,7 @@ def prediction_function(filename):
     y_test = pd.read_csv("resources/y_test.csv", index_col=0).values
     theta_list = pd.read_csv("theta.csv", index_col=0).values
     y_predict = one_versus_all_test(x_test, y_test, theta_list)
-    print(accuracy_score_(y_test, y_predict))
+    print("Accuracy Score: ", accuracy_score_(y_test, y_predict))
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
