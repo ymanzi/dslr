@@ -26,10 +26,11 @@ clean:
 	rm -f __pycache__
 
 predict:
-	python3.8 logreg_predict.py resources/x_test.csv
+	python3.8 logreg_predict.py resources/x_test.csv theta.csv
+	# python3.8 logreg_predict.py resources/dataset_test.csv theta.csv
 
 train:
-	python3.8 logreg_train.py resources/x_train.csv
+	python3.8 logreg_train.py resources/dataset_train.csv
 
 histo:
 	python3.8 histogram.py resources/dataset_train.csv
