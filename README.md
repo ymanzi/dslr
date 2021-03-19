@@ -26,32 +26,40 @@
 ## Visualization
 
 ### ➣ Make describe
-**Display information for all numerical *features*.**
 
   ``` python3.8 describe.py DATASET_NAME.csv```
+  
+**Display information for all numerical *features*.**
 
-![myImage](https://media.giphy.com/media/l3q2Wl7Wpz09Z5hfi/giphy.gif)
+
+<img src="https://github.com/ymanzi/dslr/blob/main/images/describe.png" alt="Describe" width=500 height=250>
 
 ### ➣ Make histo
-**Display a histogram** answering the question:
-* Which Hogwarts course has a homogeneous score distribution between all four houses?
+
 ``` python3.8 histogram.py DATASET_NAME.csv ```
 
-![myImage](https://media.giphy.com/media/l3q2Wl7Wpz09Z5hfi/giphy.gif)
+**Display a histogram** answering the question:
+* Which Hogwarts course has a homogeneous score distribution between all four houses?
+
+
+
+<img src="https://github.com/ymanzi/dslr/blob/main/images/histogram.png" alt="Histogram" width=500 height=350>
 
 ### ➣ Make pair
-**Display a pair plot** answering the question:
-* From this visualization, what features are you going to use for your logistic regression??
+
 ``` python3.8 pair_plot.py DATASET_NAME.csv ```
 
-![myImage](https://media.giphy.com/media/l3q2Wl7Wpz09Z5hfi/giphy.gif)
+**Display a pair plot** answering the question:
+* From this visualization, what features are you going to use for your logistic regression??
+
+
+<img src="https://github.com/ymanzi/dslr/blob/main/images/pair_plot.png" alt="pair plot" width=500 height=350>
 
 ### ➣ Make scatter
-**Display a scatter plot** answering the question:
-* What are the two features that are similar ?
+
 ``` python3.8 scatter_plot.py DATASET_NAME.csv ```
 
-![myImage](https://media.giphy.com/media/l3q2Wl7Wpz09Z5hfi/giphy.gif)
+**Display a scatter plot** answering the question:
+* What are the two features that are similar ?
 
-
-
+<img src="https://github.com/ymanzi/dslr/blob/main/images/scatter_plot.png" alt="scatter plot" width=500 height=350>
