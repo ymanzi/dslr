@@ -26,19 +26,19 @@ clean:
 	rm -f __pycache__ houses.csv theta.csv
 
 describe:
-	python3.8 describe.py resources/dataset_train.csv
+	python3 describe.py resources/dataset_train.csv
 
 predict:
-	python3.8 logreg_predict.py resources/dataset_test.csv theta.csv
+	python3 logreg_predict.py resources/dataset_test.csv theta.csv
 
 train:
-	python3.8 logreg_train.py resources/dataset_train.csv # batch
+	python3 logreg_train.py resources/dataset_train.csv # batch
 
 histo:
-	python3.8 histogram.py resources/dataset_train.csv
+	python3 histogram.py resources/dataset_train.csv
 
 pair:
-	python3.8 pair_plot.py resources/dataset_train.csv
+	python3 pair_plot.py resources/dataset_train.csv
 
 scatter:
-	python3.8 scatter_plot.py resources/dataset_train.csv
+	python3 scatter_plot.py resources/dataset_train.csv
