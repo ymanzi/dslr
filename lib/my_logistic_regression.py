@@ -6,7 +6,7 @@ class MyLogisticRegression():
     Description:
         My personnal logistic regression to classify things.
     """
-    def __init__(self, theta, alpha=0.001, n_cycle=1000, lambda_ = 0.0, penalty='l2', grandient_type='batch'):
+    def __init__(self, theta, alpha=0.001, n_cycle=100000, lambda_ = 0.0, penalty='l2', grandient_type='batch'):
         self.alpha = alpha
         self.n_cycle = n_cycle
         self.theta = np.array(theta).reshape(-1, 1)

@@ -23,7 +23,7 @@ env:
 	pip install matplotlib
 
 clean:
-	rm -f __pycache__ houses.csv theta.csv
+	rm -f __pycache__ houses.csv theta.csv resources/x* resources/y*
 
 describe:
 	python3 describe.py resources/dataset_train.csv
